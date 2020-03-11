@@ -17,11 +17,4 @@ class TodoAppApplicationTests {
 		assertEquals(true,true);
 	}
 
-	@Test
-	void failTest() {
-		assertEquals(true,false);
-	}
-
-
-
 }
