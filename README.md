@@ -8,6 +8,7 @@ A sample TODO Project using some of the tools and technologies mentioned below
 * Github
 * IntelliJ
 * Snyk
+* Dependabot
 
 ### Build Status
 ![](https://github.com/skirankumars31/TodoApp/workflows/verifymaster/badge.svg)
