@@ -11,6 +11,9 @@ A sample TODO Project using some of the tools and technologies mentioned below
 * Dependabot
 * OpenAPI 3.0 and Swagger
 
+### Sonar Code Quality Check
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=skirankumars31_TodoApp&metric=alert_status)](https://sonarcloud.io/dashboard?id=skirankumars31_TodoApp)
+
 ### Swagger UI
 Swagger is used for API documentation and is exposed through the link http://localhost:8080/swagger-ui.html
 
