@@ -21,6 +21,6 @@ class HelloWorldControllerTest {
     @Test
     void sayHello_should_return_correct_string() {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/api/sayHello/Kiran",
-                String.class)).contains("Hello Kiran");
+            String.class)).contains("Hello Kiran");
     }
 }
