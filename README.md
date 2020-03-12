@@ -2,7 +2,7 @@
 A sample TODO Project using some of the tools and technologies mentioned below
 
 ### Technologies Used
-* Java 13
+* Java 11
 * Maven
 * Spring Boot
 * Github
