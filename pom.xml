@@ -10,12 +10,15 @@
     </parent>
     <groupId>no.rini.personal</groupId>
     <artifactId>TodoApp</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}${sha1}${changelist}</version>
     <name>TodoApp</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <java.version>13</java.version>
+        <java.version>11</java.version>
+        <revision>1.0.0</revision>
+        <changelist>-SNAPSHOT</changelist>
+        <sha1/>
     </properties>
 
     <dependencies>
@@ -62,6 +65,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
             </plugin>
         </plugins>
     </build>
