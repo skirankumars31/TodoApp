@@ -22,7 +22,7 @@
         <sonar.projectKey>skirankumars31_TodoApp</sonar.projectKey>
         <sonar.organization>skirankumars31</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.login>aa82eb91c94b63e4cefcbef8842bcd2619b3bada</sonar.login>
+        <sonar.login>e4a5b33a6c2e003ffe24e073ca77fda076fe8fdf</sonar.login>
     </properties>
 
     <dependencies>
