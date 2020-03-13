@@ -19,6 +19,10 @@
         <revision>1.0.0</revision>
         <changelist>-SNAPSHOT</changelist>
         <sha1/>
+        <sonar.projectKey>skirankumars31_TodoApp</sonar.projectKey>
+        <sonar.organization>skirankumars31</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.login>e4a5b33a6c2e003ffe24e073ca77fda076fe8fdf</sonar.login>
     </properties>
 
     <dependencies>
@@ -61,7 +65,23 @@
     </dependencies>
 
     <build>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>3.7.0.1746</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.7.0.1746</version>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
