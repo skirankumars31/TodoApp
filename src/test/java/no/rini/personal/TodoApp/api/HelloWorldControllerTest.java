@@ -30,23 +30,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureMockMvc
 class HelloWorldControllerTest {
 
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
-
-    @MockBean
-    private TaskService taskService;
-
     @InjectMocks
     HelloWorldController helloWorldController;
-
     GsonBuilder gsonBuilder;
     Gson gson;
+    @LocalServerPort
+    private int port;
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private TestRestTemplate restTemplate;
+    @MockBean
+    private TaskService taskService;
 
     @BeforeEach
     void beforeEach() {
@@ -75,15 +70,56 @@ class HelloWorldControllerTest {
         JSONAssert.assertEquals("200", String.valueOf(result.getResponse().getStatus()), false);
     }
 
+    @Test
+    void check_if_task_is_edited_successfully() throws Exception {
+        //Arrange
+        Task write = new Task(1, "Write Book", "Write about a subject you like");
+        Mockito.when(taskService.editTask(Mockito.any(Task.class), Mockito.anyInt())).thenReturn("Task Edited");
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/api/editTask/{id}", 1).accept(MediaType.APPLICATION_JSON).content(gson.toJson(write)).contentType(MediaType.APPLICATION_JSON);
+
+        //Act
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+        //Assert
+        JSONAssert.assertEquals("200", String.valueOf(result.getResponse().getStatus()), false);
+    }
 
     @Test
-    void test_if_getTasks_returns_all_tasks() throws Exception {
+    void check_if_task_is_deleted_successfully() throws Exception {
+        //Arrange
+        Mockito.when(taskService.deleteTask(Mockito.anyInt())).thenReturn("Task Edited");
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/api/deleteTask/{id}", 1).accept(MediaType.APPLICATION_JSON);
+
+        //Act
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+        //Assert
+        JSONAssert.assertEquals("200", String.valueOf(result.getResponse().getStatus()), false);
+    }
+
+    @Test
+    void check_if_get_task_is_successful() throws Exception {
+        //Arrange
+        Task write = new Task(1, "Write Book", "Write about a subject you like");
+        Mockito.when(taskService.getTask(Mockito.anyInt())).thenReturn(write);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/getTask/{id}", 1).accept(MediaType.APPLICATION_JSON);
+
+        //Act
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+        //Assert
+        JSONAssert.assertEquals(gson.toJson(write), result.getResponse().getContentAsString(), false);
+    }
+
+
+    @Test
+    void test_if_getallTasks_returns_all_tasks() throws Exception {
         //Arrange
         ArrayList<Task> tasks = new ArrayList<>();
         Task write = new Task(1, "Write Book", "Write about a subject you like");
         tasks.add(write);
-        Mockito.when(taskService.getTasks()).thenReturn(tasks);
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/getTasks").accept(MediaType.APPLICATION_JSON);
+        Mockito.when(taskService.getallTasks()).thenReturn(tasks);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/getallTasks").accept(MediaType.APPLICATION_JSON);
 
         //Act
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();

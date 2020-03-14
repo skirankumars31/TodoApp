@@ -23,9 +23,14 @@ public class HelloWorldController {
         return ResponseEntity.ok("Hello " + name);
     }
 
-    @GetMapping(value = "/getTasks", produces = "application/json")
-    public ResponseEntity<?> getTasks() {
-        return ResponseEntity.ok(taskService.getTasks());
+    @GetMapping(value = "/getallTasks", produces = "application/json")
+    public ResponseEntity<?> getallTasks() {
+        return ResponseEntity.ok(taskService.getallTasks());
+    }
+
+    @GetMapping(value = "/getTask/{id}", produces = "application/json")
+    public ResponseEntity<?> getTask(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(taskService.getTask(id));
     }
 
     @PostMapping(value = "/addTask", produces = "application/json", consumes = "application/json")

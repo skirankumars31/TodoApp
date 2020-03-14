@@ -13,8 +13,18 @@ public class TaskService {
 
     ArrayList<Task> tasks = new ArrayList<>();
 
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getallTasks() {
         return tasks;
+    }
+
+    public Task getTask(Integer id) {
+
+        Task foundTask = tasks.stream()
+            .filter((Task task) -> task.getId().equals(1))
+            .findAny()
+            .orElse(null);
+
+        return foundTask;
     }
 
     public String addTask(Task task) {
