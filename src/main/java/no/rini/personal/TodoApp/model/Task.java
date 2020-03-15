@@ -1,16 +1,20 @@
 package no.rini.personal.TodoApp.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+@Entity
 public class Task {
 
     @NotNull
+    @Id
     private Integer id;
     private String title;
     private String description;
+
+    public Task() {
+    }
 
     public Task(@NotNull Integer id, String title, String description) {
         this.id = id;

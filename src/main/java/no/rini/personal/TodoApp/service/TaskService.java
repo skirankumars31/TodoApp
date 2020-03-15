@@ -1,45 +1,49 @@
 package no.rini.personal.TodoApp.service;
 
 import no.rini.personal.TodoApp.model.Task;
-import org.springframework.http.ResponseEntity;
+import no.rini.personal.TodoApp.repository.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskService {
 
+    @Autowired
+    private TaskRepository taskRepository;
+
     ArrayList<Task> tasks = new ArrayList<>();
 
-    public ArrayList<Task> getallTasks() {
-        return tasks;
+    public List<Task> getallTasks() {
+        return taskRepository.findAll();
     }
 
     public Task getTask(Integer id) {
-
-        Task foundTask = tasks.stream()
-            .filter((Task task) -> task.getId().equals(1))
-            .findAny()
-            .orElse(null);
-
-        return foundTask;
+        Optional<Task> foundTask = taskRepository.findById(id);
+        return foundTask.orElse(null);
     }
 
     public String addTask(Task task) {
-        tasks.add(task);
+        taskRepository.saveAndFlush(task);
         return "Task Added";
     }
 
     public String editTask(Task editTask, Integer id) {
-        tasks.removeIf((Task task) -> editTask.getId().equals(id));
-        tasks.add(editTask);
-        return "Task edited";
+
+        if(taskRepository.existsById(id)){
+            taskRepository.deleteById(id);
+            taskRepository.saveAndFlush(editTask);
+            return "Task edited";
+        }
+        else
+            return "Task does not exist";
     }
 
     public String deleteTask(Integer id) {
-        tasks.removeIf((task) -> (task.getId().equals(id)));
+        taskRepository.deleteById(id);
         return "Task deleted";
     }
 
