@@ -54,7 +54,7 @@ public class HelloWorldController {
     @DeleteMapping("/deleteTask/{id}")
     public ResponseEntity<?> deleteTask(@PathVariable("id") Integer id) {
         logger.info("Invoked deleteTask Method");
-        taskService.getallTasks().removeIf((task) -> (task.getId().equals(id)));
+        taskService.getallTasks().removeIf(task -> (task.getId().equals(id)));
         return ResponseEntity.ok(taskService.deleteTask(id));
     }
 
