@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,6 +17,9 @@ public class HelloWorldController {
 
     @Autowired
     TaskService taskService;
+
+    @Autowired
+    KafkaTemplate<String,String> kafkaTemplate;
 
     Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 
@@ -56,6 +60,12 @@ public class HelloWorldController {
         logger.info("Invoked deleteTask Method");
         taskService.getallTasks().removeIf(task -> (task.getId().equals(id)));
         return ResponseEntity.ok(taskService.deleteTask(id));
+    }
+
+    @PostMapping("/PayTask")
+    public ResponseEntity<?> payTask() {
+        kafkaTemplate.send("example","hello");
+        return ResponseEntity.ok("posted the data");
     }
 
 }
