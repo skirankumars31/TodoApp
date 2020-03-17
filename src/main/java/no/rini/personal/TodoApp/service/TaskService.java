@@ -5,6 +5,7 @@ import no.rini.personal.TodoApp.repository.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,11 @@ public class TaskService {
     Logger logger = LoggerFactory.getLogger(TaskService.class);
 
     ArrayList<Task> tasks = new ArrayList<>();
+
+    @KafkaListener(topics = "example",groupId = "group_id")
+    public void consumeTask(String message){
+        System.out.println("The message consumed from kafka is "+ message);
+    }
 
     public List<Task> getallTasks() {
         logger.info("Invoked the getallTasks in Service");
