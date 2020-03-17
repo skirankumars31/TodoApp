@@ -18,9 +18,6 @@ public class HelloWorldController {
     @Autowired
     TaskService taskService;
 
-    @Autowired
-    KafkaTemplate<String,String> kafkaTemplate;
-
     Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 
     @GetMapping(value = "/sayHello/{name}", produces = "application/json")
@@ -62,10 +59,9 @@ public class HelloWorldController {
         return ResponseEntity.ok(taskService.deleteTask(id));
     }
 
-    @PostMapping("/PayTask")
-    public ResponseEntity<?> payTask() {
-        kafkaTemplate.send("example","hello");
-        return ResponseEntity.ok("posted the data");
+    @PostMapping("/completeTask/{id}")
+    public ResponseEntity<?> completeTask(@PathVariable("id") Integer taskID) {
+        return ResponseEntity.ok(taskService.completeTask(taskID));
     }
 
 }
