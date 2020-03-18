@@ -26,7 +26,7 @@ public class TaskService {
 
     ArrayList<Task> tasks = new ArrayList<>();
 
-    @KafkaListener(topics = "example",groupId = "group_id")
+    @KafkaListener(topics = "example2",groupId = "group_id")
     public void consumeTask(String message){
         System.out.println("The message consumed from kafka is "+ message);
     }
